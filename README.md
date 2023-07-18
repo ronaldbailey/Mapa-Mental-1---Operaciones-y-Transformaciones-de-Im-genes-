@@ -9,4 +9,4 @@ https://dreampuf.github.io/GraphvizOnline/
 
 
 
-![Alt text](Mapa mental.png)
+![Alt text](Mapa_mental.png)
