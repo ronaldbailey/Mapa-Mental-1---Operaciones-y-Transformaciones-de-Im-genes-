@@ -1,0 +1,98 @@
+digraph {
+	node [fillcolor=lightblue shape=box style=filled]
+	rankdir=LR
+	subgraph cluster_nivel1 {
+		label="Nivel 1: Importar bibliotecas y leer imagen"
+		importar [label="Importar
+bibliotecas
+import cv2
+import matplotlib.pyplot as plt
+import numpy as np"]
+		leer_imagen [label="Leer
+imagen
+img = cv2.imread('imagen.jpg')"]
+	}
+	subgraph cluster_nivel2 {
+		node [fillcolor=lightyellow]
+		label="Nivel 2: Transformaciones de la imagen"
+		transformacion1 [label="Transformación 1:
+Convertir imagen a RGB
+img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)"]
+		transformacion2 [label="Transformación 2:
+Crear imagen monocroma
+monocroma = np.zeros((alto, ancho, 3))
+for i in range(0, alto):
+    for j in range(0, ancho):
+        pixel = img_rgb[i, j]
+        red = pixel[0]
+        monocroma[i, j] = [0, 0, red]"]
+		transformacion3 [label="Transformación 3:
+Crear imagen bicroma
+bicroma = np.zeros((alto, ancho, 3))
+for i in range(0, alto):
+    for j in range(0, ancho):
+        pixel = img_rgb[i, j]
+        green = pixel[1]
+        red = pixel[0]
+        bicroma[i, j] = [0, green, red]"]
+		transformacion4 [label="Transformación 4:
+Crear imagen en escala de grises
+gris = np.zeros((alto, ancho, 3))
+for i in range(0, alto):
+    for j in range(0, ancho):
+        pixel = img_rgb[i, j]
+        blue = pixel[2]
+        green = pixel[1]
+        red = pixel[0]
+        gris[i, j] = int((blue + green + red) / 3)"]
+		transformacion5 [label="Transformación 5:
+Crear imagen en escala de grises promediada
+gris_promediada = np.zeros((alto, ancho, 3))
+for i in range(0, alto):
+    for j in range(0, ancho):
+        pixel = img_rgb[i, j]
+        blue = pixel[2]
+        green = pixel[1]
+        red = pixel[0]
+        gris_promediada[i, j] = int((blue + green + red) / 3)"]
+		transformacion6 [label="Transformación 6:
+Crear imagen en escala de grises ponderada
+gris_ponderada = np.zeros((alto, ancho, 3))
+for i in range(0, alto):
+    for j in range(0, ancho):
+        pixel = img_rgb[i, j]
+        blue = pixel[2]
+        green = pixel[1]
+        red = pixel[0]
+        gris_ponderada[i, j] = int(0.299 * red + 0.587 * green + 0.144 * blue)"]
+	}
+	subgraph cluster_nivel3 {
+		node [fillcolor=lightpink]
+		label="Nivel 3: Guardar imágenes transformadas"
+		guardar1 [label="Guardar imagen RGB
+cv2.imwrite('imagen_rgb.jpg', img_rgb)"]
+		guardar2 [label="Guardar imagen monocroma
+cv2.imwrite('monocroma.jpg', monocroma)"]
+		guardar3 [label="Guardar imagen bicroma
+cv2.imwrite('bicroma.jpg', bicroma)"]
+		guardar4 [label="Guardar imagen en escala de grises
+cv2.imwrite('gris.jpg', gris)"]
+		guardar5 [label="Guardar imagen en escala de grises promediada
+cv2.imwrite('gris_promediada.jpg', gris_promediada)"]
+		guardar6 [label="Guardar imagen en escala de grises ponderada
+cv2.imwrite('gris_ponderada.jpg', gris_ponderada)"]
+	}
+	importar -> leer_imagen
+	leer_imagen -> transformacion1
+	transformacion1 -> transformacion2
+	transformacion1 -> transformacion3
+	transformacion1 -> transformacion4
+	transformacion4 -> transformacion5
+	transformacion4 -> transformacion6
+	transformacion2 -> guardar2
+	transformacion3 -> guardar3
+	transformacion4 -> guardar4
+	transformacion5 -> guardar5
+	transformacion6 -> guardar6
+	transformacion1 -> guardar1
+}
